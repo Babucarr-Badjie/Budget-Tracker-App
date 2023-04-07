@@ -1,13 +1,39 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* ======= Google font import ======= */
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Overpass:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap");
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ========Tailwind directive ========= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== styles ====== */
+@layer components {
+  .delete-user-button {
+    @apply flex justify-end absolute px-4 py-2
+    top-[3%] right-[3%] items-center border-double border-4 
+    border-red-300 cursor-pointer hover:bg-red-400 rounded-lg
+    hover:text-white;
+  }
+  .user-registration {
+    @apply flex mt-4 border-solid border-2 border-gray-400 flex 
+    rounded-md max-w-prose max-w-screen-md p-2;
+  }
+  .button {
+    @apply flex mt-4 border-solid border-2 border-black 
+    rounded-lg px-4 py-2 cursor-pointer bg-indigo-200
+    hover:bg-black hover:text-white;
+  }
+  .budget-form {
+    @apply flex-grow flex-shrink flex-1 w-48 relative grid 
+    max-w-[100%] gap-4 border-2 border-dotted border-black 
+    rounded-lg p-3 bg-gray-100;
+  }
+  .budget-form-input {
+    @apply grid w-full gap-2;
+  }
+  .create-budget-button {
+    @apply flex mt-4 border-solid border-2 border-black 
+    rounded-lg px-4 py-2 cursor-pointer bg-indigo-200
+    hover:bg-black hover:text-white w-fit;
+  }
 }
