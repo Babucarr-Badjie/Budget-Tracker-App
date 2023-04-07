@@ -63,6 +63,7 @@ export default function DashBoard() {
               <div className="grid w-full gap-4">
                 <p>Personal budgeting is the secret to financial freedom</p>
                 <p>Start your journey now!</p>
+                <p>come on</p>
                 <AddBudgetForm />
               </div>
             )}
