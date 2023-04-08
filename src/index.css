@@ -24,12 +24,15 @@
     hover:bg-black hover:text-white;
   }
   .budget-form {
-    @apply flex-grow flex-shrink flex-1 w-48 relative grid 
-    max-w-[100%] gap-4 border-2 border-dotted border-black 
+    @apply flex-grow flex-wrap relative grid 
+    max-w-[100%] gap-4 border-2 border-solid border-black 
     rounded-lg p-3 bg-gray-100;
   }
   .budget-form-input {
     @apply grid w-full gap-2;
+  }
+  .expense-form-input {
+    @apply flex gap-2;
   }
   .create-budget-button {
     @apply flex mt-4 border-solid border-2 border-black 

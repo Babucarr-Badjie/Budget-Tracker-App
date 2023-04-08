@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Form, useFetcher } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
 export default function AddBudgetForm() {
@@ -10,19 +10,22 @@ export default function AddBudgetForm() {
   // clear (reset) the add budget form after submitting
   const addBudgetFormRef = useRef();
 
-  // refocus the form to Budget form
+  // refocus the form to Budget name
   const focusFormRef = useRef();
 
   useEffect(() => {
     if (!isSubmitting) {
+      // clear the form
       addBudgetFormRef.current.reset();
+
+      // refocus the form to Budget name
       focusFormRef.current.focus();
     }
   }, [isSubmitting]);
 
   return (
     <div className="budget-form">
-      <h2>Create Your Budget</h2>
+      <h2 className="font-extrabold text-xl">Create Your Budget</h2>
       <fetcher.Form
         method="post"
         className="grid w-full gap-4"
@@ -44,6 +47,7 @@ export default function AddBudgetForm() {
           <label htmlFor="newBudgetAmount">Budget Amount</label>
           <input
             type="number"
+            min={0}
             step="0.01"
             name="addBudgetAmount"
             id="addBudgetAmount"

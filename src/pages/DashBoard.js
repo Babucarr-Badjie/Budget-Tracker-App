@@ -1,8 +1,9 @@
 import { useLoaderData } from "react-router-dom";
-import { createBudget, fetchLocalData } from "../storageHelper";
+import { createBudget, createExpense, fetchLocalData } from "../storageHelper";
 import Content from "../components/Content";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../components/AddBudgetForm";
+import AddExpenseForm from "../components/AddExpenseForm";
 
 // ============Dashboard loader function ============
 export function dashBoardLoader() {
@@ -36,9 +37,27 @@ export async function dashBoardAction({ request }) {
         amount: values.addBudgetAmount,
       });
 
-      return toast.success("Your have successfully created your Budget");
+      return toast.success("You have successfully created your Budget");
     } catch (error) {
       throw new Error("Your budget couldn't be created, please try again");
+    }
+  }
+
+  // add expense submission
+  if (_action === "createNewExpense") {
+    try {
+      // create the expense
+      createExpense({
+        name: values.addNewExpense,
+        amount: values.addNewExpenseAmount,
+        budgetId: values.addNewExpenseBudget,
+      });
+
+      return toast.success(
+        `You have successfully added ${values.addNewExpense} to your Budget`
+      );
+    } catch (error) {
+      throw new Error("Your expense couldn't be created, please try again");
     }
   }
 }
@@ -57,6 +76,7 @@ export default function DashBoard() {
               <div className="grid w-full, gap-4">
                 <div className="flex flex-wrap items-start gap-4">
                   <AddBudgetForm />
+                  <AddExpenseForm budgets={budgets} />
                 </div>
               </div>
             ) : (
