@@ -4,6 +4,7 @@ import Content from "../components/Content";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";
+import BudgetCards from "../components/BudgetCards";
 
 // ============Dashboard loader function ============
 export function dashBoardLoader() {
@@ -61,6 +62,7 @@ export async function dashBoardAction({ request }) {
     }
   }
 }
+
 export default function DashBoard() {
   const { userName, budgets } = useLoaderData();
   return (
@@ -77,6 +79,14 @@ export default function DashBoard() {
                 <div className="flex flex-wrap items-start gap-4">
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
+                </div>
+                <h1 className="font-extrabold text-xl mt-4">
+                  Existing Budgets
+                </h1>
+                <div className="existing-budgets">
+                  {budgets.map((budget) => (
+                    <BudgetCards key={budget.id} budget={budget} />
+                  ))}
                 </div>
               </div>
             ) : (
