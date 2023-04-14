@@ -1,16 +1,24 @@
-import { useLoaderData } from "react-router-dom";
-import { createBudget, createExpense, fetchLocalData } from "../storageHelper";
+import { Link, useLoaderData } from "react-router-dom";
+import {
+  createBudget,
+  createExpense,
+  deleteExpense,
+  fetchLocalData,
+} from "../storageHelper";
 import Content from "../components/Content";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetCards from "../components/BudgetCards";
+import ExpensesTable from "../components/ExpensesTable";
 
 // ============Dashboard loader function ============
 export function dashBoardLoader() {
   const userName = fetchLocalData("userName");
   const budgets = fetchLocalData("budgets");
-  return { userName, budgets };
+  const expenses = fetchLocalData("expenses");
+
+  return { userName, budgets, expenses };
 }
 // ============Dashboard action function ============
 export async function dashBoardAction({ request }) {
@@ -61,10 +69,22 @@ export async function dashBoardAction({ request }) {
       throw new Error("Your expense couldn't be created, please try again");
     }
   }
+
+  // delete expense
+  if (_action === "deleteExpense") {
+    try {
+      // delete Expense from the local storage
+      deleteExpense({ key: "expenses", id: values.expenseId });
+
+      return toast.success("Expense deleted");
+    } catch (error) {
+      throw new Error("Your expense couldn't be deleted, please try again");
+    }
+  }
 }
 
 export default function DashBoard() {
-  const { userName, budgets } = useLoaderData();
+  const { userName, budgets, expenses } = useLoaderData();
   return (
     <>
       {userName ? (
@@ -88,12 +108,33 @@ export default function DashBoard() {
                     <BudgetCards key={budget.id} budget={budget} />
                   ))}
                 </div>
+                {expenses && expenses.length > 0 && (
+                  <div className="grid w-full gap-5">
+                    <h1 className="font-extrabold text-xl mt-4">
+                      Recent Expenses
+                    </h1>
+                    <ExpensesTable
+                      expenses={expenses
+                        .sort(
+                          (previous, recent) =>
+                            recent.createdTime - previous.createdTime
+                        )
+                        .slice(0, 8)}
+                    />
+
+                    {/* show a Link to expenses */}
+                    {expenses.length > 4 && (
+                      <Link to="expenses" className="create-budget-button">
+                        View all expenses
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="grid w-full gap-4">
                 <p>Personal budgeting is the secret to financial freedom</p>
                 <p>Start your journey now!</p>
-                <p>come on</p>
                 <AddBudgetForm />
               </div>
             )}

@@ -4,7 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 
 export default function Navbar({ userName }) {
   return (
-    <nav>
+    <nav className="mb-8">
       <NavLink
         to="/"
         aria-label="Go to home page"

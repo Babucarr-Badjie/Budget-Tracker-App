@@ -4,8 +4,9 @@ import {
   formatPercentage,
   globalCurrency,
 } from "../storageHelper";
+import { Form, Link } from "react-router-dom";
 
-export default function BudgetCards({ budget }) {
+export default function BudgetCards({ budget, showDeleteBudget = false }) {
   const { name, amount, id } = budget;
 
   //   amount spent
@@ -28,6 +29,28 @@ export default function BudgetCards({ budget }) {
         <small>{globalCurrency(amountSpent)} spent</small>
         <small>{globalCurrency(amount - amountSpent)} remaining</small>
       </div>
+      {showDeleteBudget ? (
+        <div className="flex w-full gap-4 justify-center">
+          <Form
+            method="post"
+            action="delete"
+            onSubmit={(event) => {
+              if (
+                !window.confirm(
+                  `Do you want to permanently delete ${budget.name} budget?`
+                )
+              ) {
+                event.preventDefault();
+              }
+            }}
+            
+          ><button type="submit" className="delete-expense">Delete Budget</button></Form>
+        </div>
+      ) : (
+        <Link to={`/budget/${id}`} className="create-budget-button">
+          <span>View Details</span>
+        </Link>
+      )}
     </div>
   );
 }

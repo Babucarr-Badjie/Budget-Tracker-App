@@ -68,3 +68,22 @@ export const formatPercentage = (amt) => {
     minimumFractionDigits: 0,
   });
 };
+
+// formatting createdTime to locale string
+export const formatCreatedTime = (date) => new Date(date).toLocaleDateString();
+
+// Get all matching items from the local storage
+export const getMatchingItems = ({ category, key, value }) => {
+  const data = fetchLocalData(category) ?? [];
+  return data.filter((item) => item[key] === value);
+};
+
+// deleting expense item
+export const deleteExpense = ({ key, id }) => {
+  const existingExpense = fetchLocalData(key);
+  if (id) {
+    const newData = existingExpense.filter((item) => item.id !== id);
+    return localStorage.setItem(key, JSON.stringify(newData));
+  }
+  return localStorage.removeItem(key);
+};

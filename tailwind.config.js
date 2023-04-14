@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         colorOne: "#0d9488",
+        colorRed: "#FF0000",
       },
     },
   },

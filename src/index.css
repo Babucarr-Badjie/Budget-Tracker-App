@@ -45,9 +45,23 @@
   .budget-cards {
     @apply grid flex-1 flex-shrink-0 w-[32.2%]
     max-w-[600px] shadow-2xl bg-gray-100 border-gray-500 border-2 
-    border-solid rounded-lg no-underline py-4 px-5 gap-4 ;
+    border-solid rounded-lg no-underline py-4 px-5 gap-4;
   }
   .budget-card-list {
     @apply flex items-center justify-between gap-4;
+  }
+  table {
+    @apply w-[100%];
+  }
+
+  table a {
+    @apply no-underline flex justify-center bg-red-50 border-solid
+    border-2 border-black rounded-full p-1 cursor-pointer 
+    hover:bg-black hover:text-white hover:duration-150 ease-in-out;
+  }
+  .delete-expense {
+    @apply flex justify-center bg-red-50  p-2 ml-4 border-2 
+    border-solid border-black rounded-lg hover:bg-colorRed
+    hover:text-white cursor-pointer;
   }
 }
