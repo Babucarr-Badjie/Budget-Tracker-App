@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+])
 function App() {
   return (
     <div className="font-bodyFont p-[3%]">
